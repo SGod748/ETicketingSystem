@@ -10,7 +10,7 @@ namespace ETicketingSystem
 {
     class customerData
     {
-        string conn = @"Data Source=PC19\SQLEXPRESS;Initial Catalog=movie;Integrated Security=True;Trust Server Certificate=True";
+        string conn = @"Data Source=MSI\SQLEXPRESS;Initial Catalog=TicketDB;Integrated Security=True;Encrypt=False";
         public string Username { get; set; } // 0
         public string Password { get; set; } // 1
 
@@ -22,7 +22,7 @@ namespace ETicketingSystem
             {
                 connect.Open();
 
-                string selectData = "SELECT * FROM users";
+                string selectData = "SELECT * FROM Account";
 
                 using (SqlCommand cmd = new SqlCommand(selectData, connect))
                 {

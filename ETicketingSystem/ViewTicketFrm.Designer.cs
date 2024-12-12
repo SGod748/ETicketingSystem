@@ -30,47 +30,39 @@
         {
             panel1 = new Panel();
             flowViewTicketPanel = new FlowLayoutPanel();
-            ticketListView1 = new TicketListView();
-            flowViewTicketPanel.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.White;
             panel1.Dock = DockStyle.Right;
-            panel1.Location = new Point(858, 0);
+            panel1.Location = new Point(981, 0);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(9, 732);
+            panel1.Size = new Size(10, 976);
             panel1.TabIndex = 0;
             // 
             // flowViewTicketPanel
             // 
             flowViewTicketPanel.AutoScroll = true;
-            flowViewTicketPanel.Controls.Add(ticketListView1);
             flowViewTicketPanel.Dock = DockStyle.Fill;
             flowViewTicketPanel.Location = new Point(0, 0);
+            flowViewTicketPanel.Margin = new Padding(3, 4, 3, 4);
             flowViewTicketPanel.Name = "flowViewTicketPanel";
-            flowViewTicketPanel.Size = new Size(858, 732);
+            flowViewTicketPanel.Size = new Size(981, 976);
             flowViewTicketPanel.TabIndex = 1;
-            // 
-            // ticketListView1
-            // 
-            ticketListView1.Location = new Point(3, 3);
-            ticketListView1.Name = "ticketListView1";
-            ticketListView1.Size = new Size(840, 172);
-            ticketListView1.TabIndex = 0;
             // 
             // ViewTicketFrm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(867, 732);
+            ClientSize = new Size(991, 976);
             Controls.Add(flowViewTicketPanel);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 4, 3, 4);
             Name = "ViewTicketFrm";
             Text = "ViewTicketFrm";
-            flowViewTicketPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -78,6 +70,5 @@
 
         private Panel panel1;
         private FlowLayoutPanel flowViewTicketPanel;
-        private TicketListView ticketListView1;
     }
 }

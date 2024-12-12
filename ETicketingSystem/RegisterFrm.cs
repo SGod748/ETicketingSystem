@@ -10,7 +10,7 @@ namespace ETicketingSystem
 {
     public partial class RegisterFrm : Form
     {
-        string conn = @"Data Source=PC19\SQLEXPRESS;Initial Catalog=movie;Integrated Security=True;Trust Server Certificate=True";
+        string conn = @"Data Source=MSI\SQLEXPRESS;Initial Catalog=TicketDB;Integrated Security=True;Encrypt=False";
 
         public RegisterFrm()
         {
@@ -126,7 +126,7 @@ namespace ETicketingSystem
                 {
                     connect.Open();
 
-                    string checkUsername = "SELECT * FROM users WHERE username = @usern";
+                    string checkUsername = "SELECT * FROM Account WHERE usern = @usern";
 
                     using (SqlCommand checkUsern = new SqlCommand(checkUsername, connect))
                     {
@@ -144,7 +144,7 @@ namespace ETicketingSystem
                         }
                         else
                         {
-                            string insertData = "INSERT INTO users (username, password, email, date_reg)" +
+                            string insertData = "INSERT INTO Account (usern, pass, email, date)" +
                                 "VALUES(@usern, @pass, @email, @date)";
 
                             DateTime today = DateTime.Today;

@@ -1,0 +1,1 @@
+﻿CREATE TABLE Account(usern varchar(99), email varchar(99), pass varchar(99), date date);

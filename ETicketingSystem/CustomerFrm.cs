@@ -54,7 +54,9 @@ namespace ETicketingSystem
 
         private void buyTicket_btn_Click(object sender, EventArgs e)
         {
-            openChildForm(new BuyTicketFrm());
+            //Dito ang may error
+            //BuyTicketFrm buy = new BuyTicketFrm();
+           // openChildForm(buy);
         }
 
         private Form activeForm = null;

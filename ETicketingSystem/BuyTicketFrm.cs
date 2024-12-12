@@ -7,28 +7,59 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Data.SqlClient;
+using Microsoft.VisualBasic.Devices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace ETicketingSystem
 {
     public partial class BuyTicketFrm : Form
     {
-        string conn = @"Data Source=PC19\SQLEXPRESS;Initial Catalog=movie;Integrated Security=True;Trust Server Certificate=True";
+        string conn = @"Data Source=MSI\SQLEXPRESS;Initial Catalog=TicketDB;Integrated Security=True;Encrypt=False";
 
-        public BuyTicketFrm()
+        private readonly ViewTicketFrm _parentForm;
+
+        //Declare movie details at the class level
+        private string movie = "", genre = "", disclaimer = "";
+        private int price = 0, cinema = 0;
+        public BuyTicketFrm(ViewTicketFrm parentForm)
         {
-            // KUYA HARVEY
+           
             InitializeComponent();
+            _parentForm = parentForm;
         }
 
-        private void buyTicket_selectmovieBtn_Click(object sender, EventArgs e)
-        {
-            SelectMovieFrm selectMovieFrm = new SelectMovieFrm();
-            selectMovieFrm.Show();
-        }
+        
+
 
         private void buyTicket_calculateBtn_Click(object sender, EventArgs e)
         {
+            // Get the quantity entered by the user
+            int quantity = 0;
+            if (int.TryParse(txtQuantity.Text, out quantity) && quantity > 0)
+            {
+                // Get the price from the label
+                int ticket_price = 0;
+                if (int.TryParse(lblPrice.Text, out ticket_price))
+                {
+                    // Calculate the total price
+                    int totalPrice = ticket_price * quantity;
+
+                    // Display the total price in lblTicketPrice
+                    lblTotal.Text = $"{totalPrice}";  // Assuming lblTicketPrice is a Label to display the total price
+                    lblQuantity.Text = $"{quantity}";
+                    lblTicketPrice.Text = $"{ticket_price}";
+                }
+                else
+                {
+                    MessageBox.Show("Please make sure the price is valid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid quantity.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
@@ -134,7 +165,157 @@ namespace ETicketingSystem
         }
 
 
+       
+
+
         private void buyTicket_Btn_Click(object sender, EventArgs e)
+        {
+
+           
+
+
+            // Ensure movie details are available before calling the InsertMovieDetails method
+            string movie = lblMovieName.Text;
+            string genre = lblGenre.Text;
+            string disclaimer = lblDisclaimer.Text;
+
+            int price = 0;
+            int cinema = 0;
+
+            // Make sure the values from the labels are valid
+            if (!string.IsNullOrEmpty(movie) && !string.IsNullOrEmpty(genre) && !string.IsNullOrEmpty(disclaimer)
+                && int.TryParse(lblPrice.Text, out price) && int.TryParse(lblCinema.Text, out cinema))
+            {
+                // If values are valid, insert them into the database
+                InsertMovieDetails(movie, genre, price, cinema, disclaimer);
+            }
+            else
+            {
+                MessageBox.Show("Please select a valid movie before purchasing a ticket.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void InsertMovieDetails(string movie, string genre, int price, int cinema, string disclaimer)
+        {
+            using (SqlConnection connection = new SqlConnection(conn))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // SQL Insert Query
+                    string query = "INSERT INTO Ticket(Movie_Name, Genre, Price, Cinema_Room, Disclaimer) " +
+                                   "VALUES (@Movie_Name, @Genre, @Price, @Cinema_Room, @Disclaimer)";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        // Adding parameters to avoid SQL injection
+                        command.Parameters.AddWithValue("@Movie_Name", movie);
+                        command.Parameters.AddWithValue("@Genre", genre);
+                        command.Parameters.AddWithValue("@Price", price);
+                        command.Parameters.AddWithValue("@Cinema_Room", cinema);
+                        command.Parameters.AddWithValue("@Disclaimer", disclaimer);
+
+                        // Execute the command
+                        int rowsAffected = command.ExecuteNonQuery();
+                        
+                        _parentForm.AddNewBooking(
+                          lblMovieName.Text, lblGenre.Text, lblPrice.Text, lblGenre.Text, lblCinema.Text);
+
+                        // Check if the insertion was successful
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Movie details have been successfully inserted into the database.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to insert movie details into the database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        
+
+        private void buyTicket_printrecieptBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbMovieName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string genre = "";
+            string movie = "";
+            int cinema = 0;
+            int price = 0;
+            string disclaimer = "";
+
+            if (cbMovieName.SelectedItem != null)
+            {
+                switch (cbMovieName.SelectedItem.ToString())
+                {
+                    case "Moana 2":
+                        movie = "Moana 2";
+                        genre = "Animation/Adventure";
+                        price = 350;
+                        cinema = 1;
+                        disclaimer = "This is an animated sequel with family-friendly content.";
+                        break;
+                    case "Gladiator 2":
+                        movie = "Gladiator 2";
+                        genre = "Action/Adventure";
+                        price = 350;
+                        cinema = 4;
+                        disclaimer = "This film contains intense action and violence.";
+                        break;
+                    case "Hello, Love, Again":
+                        movie = "Hello, Love, Again";
+                        genre = "Romance/Comedy";
+                        price = 350;
+                        cinema = 2;
+                        disclaimer = "A romantic comedy with mature themes.";
+                        break;
+                    case "Mufasa The Lion King":
+                        movie = "Mufasa The Lion King";
+                        genre = "Animation/Adventure";
+                        price = 350;
+                        cinema = 3;
+                        disclaimer = "A new take on the classic Lion King tale with some emotional scenes.";
+                        break;
+                    case "Solo Leveling The Movie":
+                        movie = "Solo Leveling The Movie";
+                        genre = "Anime/Action";
+                        price = 450;
+                        cinema = 1;
+                        disclaimer = "Action-packed anime with fantasy violence.";
+                        break;
+                    default:
+                        // baseFare = 0; // Default value if no valid class is selected
+                        disclaimer = "Please select a movie.";
+                        break;
+                }
+
+                // Display the calculated base fare
+                lblMovieName.Text = movie; // Format as currency
+                lblGenre.Text = genre;
+                lblPrice.Text = $"{price}";
+                lblCinema.Text = $"{cinema}";
+                lblDisclaimer.Text = disclaimer;  // Display the disclaimer for the selected movie
+
+                
+            }
+            else
+            {
+                lblMovieName.Text = " Not movie Selected";
+            }
+
+        }
+
+        private void lblPrice_Click(object sender, EventArgs e)
         {
 
         }

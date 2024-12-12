@@ -38,6 +38,7 @@
   <ItemGroup>
     <Folder Include="Icons\" />
     <Folder Include="Movie Directory\" />
+    <Folder Include="Database\" />
   </ItemGroup>
 
   <ItemGroup>
