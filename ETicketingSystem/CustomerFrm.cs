@@ -73,5 +73,9 @@ namespace ETicketingSystem
             this.userPanel.Dock = System.Windows.Forms.DockStyle.Fill;
         }
 
+        private void viewTicket_btn_Click(object sender, EventArgs e)
+        {
+            openChildForm(new ViewTicketFrm());
+        }
     }
 }

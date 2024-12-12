@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            buyTicket_date = new TextBox();
+            label1 = new Label();
             buyTicket_cinemaHours = new ComboBox();
             label18 = new Label();
             buyTicket_cinemaRoom = new Label();
@@ -71,8 +73,6 @@
             label3 = new Label();
             buyTicket_printrecieptBtn = new Button();
             buyTicket_Btn = new Button();
-            label1 = new Label();
-            buyTicket_date = new TextBox();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -83,6 +83,7 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(buyTicket_date);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(buyTicket_cinemaHours);
@@ -104,6 +105,26 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(843, 374);
             panel1.TabIndex = 1;
+            // 
+            // buyTicket_date
+            // 
+            buyTicket_date.BorderStyle = BorderStyle.FixedSingle;
+            buyTicket_date.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buyTicket_date.Location = new Point(462, 280);
+            buyTicket_date.Margin = new Padding(3, 2, 3, 2);
+            buyTicket_date.Name = "buyTicket_date";
+            buyTicket_date.Size = new Size(196, 26);
+            buyTicket_date.TabIndex = 49;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Arial Narrow", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(368, 280);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 20);
+            label1.TabIndex = 48;
+            label1.Text = "Date:";
             // 
             // buyTicket_cinemaHours
             // 
@@ -251,6 +272,7 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
             pictureBox1.Dock = DockStyle.Fill;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Margin = new Padding(3, 2, 3, 2);
@@ -262,6 +284,7 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.Controls.Add(label13);
             panel2.Controls.Add(buyTicket_ticketQuantity);
             panel2.Controls.Add(label7);
@@ -315,9 +338,9 @@
             buyTicket_ticketPrice.Font = new Font("Arial Narrow", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buyTicket_ticketPrice.Location = new Point(116, 184);
             buyTicket_ticketPrice.Name = "buyTicket_ticketPrice";
-            buyTicket_ticketPrice.Size = new Size(55, 20);
+            buyTicket_ticketPrice.Size = new Size(43, 20);
             buyTicket_ticketPrice.TabIndex = 42;
-            buyTicket_ticketPrice.Text = "Php0.00";
+            buyTicket_ticketPrice.Text = "₱0.00";
             // 
             // label2
             // 
@@ -370,9 +393,9 @@
             buyTicket_totalPrice.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buyTicket_totalPrice.Location = new Point(116, 267);
             buyTicket_totalPrice.Name = "buyTicket_totalPrice";
-            buyTicket_totalPrice.Size = new Size(61, 16);
+            buyTicket_totalPrice.Size = new Size(42, 16);
             buyTicket_totalPrice.TabIndex = 19;
-            buyTicket_totalPrice.Text = "Php0.00";
+            buyTicket_totalPrice.Text = "₱0.00";
             // 
             // label15
             // 
@@ -397,6 +420,7 @@
             // panel4
             // 
             panel4.BackColor = Color.White;
+            panel4.BorderStyle = BorderStyle.FixedSingle;
             panel4.Controls.Add(validationLabel);
             panel4.Controls.Add(validationBtn);
             panel4.Controls.Add(debitCard);
@@ -589,26 +613,6 @@
             buyTicket_Btn.Text = "BUY TICKET";
             buyTicket_Btn.UseVisualStyleBackColor = false;
             buyTicket_Btn.Click += buyTicket_Btn_Click;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Arial Narrow", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(368, 280);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 20);
-            label1.TabIndex = 48;
-            label1.Text = "Date:";
-            // 
-            // buyTicket_date
-            // 
-            buyTicket_date.BorderStyle = BorderStyle.FixedSingle;
-            buyTicket_date.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buyTicket_date.Location = new Point(462, 280);
-            buyTicket_date.Margin = new Padding(3, 2, 3, 2);
-            buyTicket_date.Name = "buyTicket_date";
-            buyTicket_date.Size = new Size(196, 26);
-            buyTicket_date.TabIndex = 49;
             // 
             // BuyTicketFrm
             // 

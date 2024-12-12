@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            button2 = new Button();
+            viewTicket_btn = new Button();
             logout_btn = new Button();
             buyTicket_btn = new Button();
             dashboard_btn = new Button();
             panel2 = new Panel();
-            label3 = new Label();
             label2 = new Label();
             closebtn = new Label();
             userPanel = new Panel();
@@ -45,7 +44,7 @@
             // panel1
             // 
             panel1.BackColor = Color.RoyalBlue;
-            panel1.Controls.Add(button2);
+            panel1.Controls.Add(viewTicket_btn);
             panel1.Controls.Add(logout_btn);
             panel1.Controls.Add(buyTicket_btn);
             panel1.Controls.Add(dashboard_btn);
@@ -56,19 +55,20 @@
             panel1.Size = new Size(217, 773);
             panel1.TabIndex = 0;
             // 
-            // button2
+            // viewTicket_btn
             // 
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(10, 345);
-            button2.Margin = new Padding(3, 2, 3, 2);
-            button2.Name = "button2";
-            button2.Size = new Size(191, 38);
-            button2.TabIndex = 11;
-            button2.Text = "VIEW TICKET";
-            button2.UseVisualStyleBackColor = true;
+            viewTicket_btn.FlatAppearance.BorderSize = 0;
+            viewTicket_btn.FlatStyle = FlatStyle.Flat;
+            viewTicket_btn.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            viewTicket_btn.ForeColor = Color.White;
+            viewTicket_btn.Location = new Point(10, 345);
+            viewTicket_btn.Margin = new Padding(3, 2, 3, 2);
+            viewTicket_btn.Name = "viewTicket_btn";
+            viewTicket_btn.Size = new Size(191, 38);
+            viewTicket_btn.TabIndex = 11;
+            viewTicket_btn.Text = "VIEW TICKET";
+            viewTicket_btn.UseVisualStyleBackColor = true;
+            viewTicket_btn.Click += viewTicket_btn_Click;
             // 
             // logout_btn
             // 
@@ -120,7 +120,6 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
-            panel2.Controls.Add(label3);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(closebtn);
             panel2.Dock = DockStyle.Top;
@@ -129,16 +128,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(868, 40);
             panel2.TabIndex = 1;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(623, 15);
-            label3.Name = "label3";
-            label3.Size = new Size(109, 16);
-            label3.TabIndex = 3;
-            label3.Text = "Welcome, User";
             // 
             // label2
             // 
@@ -198,8 +187,7 @@
         private Button buyTicket_btn;
         private Button dashboard_btn;
         private Label label2;
-        private Label label3;
-        private Button button2;
+        private Button viewTicket_btn;
         private Panel userPanel;
     }
 }
