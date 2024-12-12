@@ -20,6 +20,7 @@ namespace ETicketingSystem
             InitializeComponent();
         }
 
+        //ajygda
         private void buyTicket_selectmovieBtn_Click(object sender, EventArgs e)
         {
             SelectMovieFrm selectMovieFrm = new SelectMovieFrm();
