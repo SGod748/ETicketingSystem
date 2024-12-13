@@ -13,8 +13,10 @@ namespace ETicketingSystem
 {
     public partial class CustomerFrm : Form
     {
+        private ViewTicketFrm viewTicketForm;
         public CustomerFrm()
         {
+
             InitializeComponent();
 
             LoadMovie();
@@ -54,9 +56,7 @@ namespace ETicketingSystem
 
         private void buyTicket_btn_Click(object sender, EventArgs e)
         {
-            //Dito ang may error
-            //BuyTicketFrm buy = new BuyTicketFrm();
-           // openChildForm(buy);
+            openChildForm(new BuyTicketFrm(viewTicketForm));
         }
 
         private Form activeForm = null;

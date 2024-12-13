@@ -16,40 +16,32 @@ namespace ETicketingSystem
 {
     public partial class BuyTicketFrm : Form
     {
-        string conn = @"Data Source=MSI\SQLEXPRESS;Initial Catalog=TicketDB;Integrated Security=True;Encrypt=False";
+        string conn = @"Data Source=JEYPI\SQLEXPRESS;Initial Catalog=movie;Integrated Security=True;Encrypt=False";
 
         private readonly ViewTicketFrm _parentForm;
 
-        //Declare movie details at the class level
+        
         private string movie = "", genre = "", disclaimer = "";
         private int price = 0, cinema = 0;
         public BuyTicketFrm(ViewTicketFrm parentForm)
         {
-           
             InitializeComponent();
             _parentForm = parentForm;
         }
 
-        
-
-
         private void buyTicket_calculateBtn_Click(object sender, EventArgs e)
         {
-            // Get the quantity entered by the user
             int quantity = 0;
             if (int.TryParse(txtQuantity.Text, out quantity) && quantity > 0)
             {
-                // Get the price from the label
                 int ticket_price = 0;
                 if (int.TryParse(lblPrice.Text, out ticket_price))
                 {
-                    // Calculate the total price
                     int totalPrice = ticket_price * quantity;
 
-                    // Display the total price in lblTicketPrice
-                    lblTotal.Text = $"{totalPrice}";  // Assuming lblTicketPrice is a Label to display the total price
+                    lblTotal.Text = $"₱{totalPrice}";  
                     lblQuantity.Text = $"{quantity}";
-                    lblTicketPrice.Text = $"{ticket_price}";
+                    lblTicketPrice.Text = $"₱{ticket_price}";
                 }
                 else
                 {
@@ -140,7 +132,7 @@ namespace ETicketingSystem
                     validationLabel.ForeColor = Color.Red;
                 }
             }
-            else if (goTyme.Checked || payPal.Checked || masterCard.Checked || debitCard.Checked)
+            else if (goTyme.Checked || payPal.Checked)
             {
                 bool hasUppercase = reference.Any(char.IsUpper);
                 bool hasMultipleNumbers = reference.Count(char.IsDigit) > 1;
@@ -154,6 +146,22 @@ namespace ETicketingSystem
                 else
                 {
                     validationLabel.Text = "Reference ID must be 17 characters long, contain uppercase letters, and multiple numbers.";
+                    validationLabel.ForeColor = Color.Red;
+                }
+            }
+            else if (masterCard.Checked || debitCard.Checked)
+            {
+                bool hasMultipleNumbers = reference.Count(char.IsDigit) > 1;
+
+                if (reference.Length == 12 && hasMultipleNumbers)
+                {
+                    validationLabel.Text = "Reference ID is valid.";
+                    validationLabel.ForeColor = Color.Green;
+                    isValid = true;
+                }
+                else
+                {
+                    validationLabel.Text = "Reference ID must be 12-digit long";
                     validationLabel.ForeColor = Color.Red;
                 }
             }
@@ -171,22 +179,18 @@ namespace ETicketingSystem
         private void buyTicket_Btn_Click(object sender, EventArgs e)
         {
 
-           
 
-
-            // Ensure movie details are available before calling the InsertMovieDetails method
             string movie = lblMovieName.Text;
             string genre = lblGenre.Text;
             string disclaimer = lblDisclaimer.Text;
 
             int price = 0;
             int cinema = 0;
-
-            // Make sure the values from the labels are valid
+            
             if (!string.IsNullOrEmpty(movie) && !string.IsNullOrEmpty(genre) && !string.IsNullOrEmpty(disclaimer)
                 && int.TryParse(lblPrice.Text, out price) && int.TryParse(lblCinema.Text, out cinema))
             {
-                // If values are valid, insert them into the database
+                
                 InsertMovieDetails(movie, genre, price, cinema, disclaimer);
             }
             else
@@ -203,26 +207,23 @@ namespace ETicketingSystem
                 {
                     connection.Open();
 
-                    // SQL Insert Query
-                    string query = "INSERT INTO Ticket(Movie_Name, Genre, Price, Cinema_Room, Disclaimer) " +
-                                   "VALUES (@Movie_Name, @Genre, @Price, @Cinema_Room, @Disclaimer)";
+                    string query = "INSERT INTO ticket_details(movie_name, genre, price, cinema_room) " +
+                                   "VALUES (@Movie_Name, @Genre, @Price, @Cinema_Room)";
 
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
-                        // Adding parameters to avoid SQL injection
-                        command.Parameters.AddWithValue("@Movie_Name", movie);
-                        command.Parameters.AddWithValue("@Genre", genre);
-                        command.Parameters.AddWithValue("@Price", price);
-                        command.Parameters.AddWithValue("@Cinema_Room", cinema);
-                        command.Parameters.AddWithValue("@Disclaimer", disclaimer);
+                        cmd.Parameters.AddWithValue("@Movie_Name", movie);
+                        cmd.Parameters.AddWithValue("@Genre", genre);
+                        cmd.Parameters.AddWithValue("@Price", price);
+                        cmd.Parameters.AddWithValue("@Cinema_Room", cinema);
 
-                        // Execute the command
-                        int rowsAffected = command.ExecuteNonQuery();
+                        
+                        int rowsAffected = cmd.ExecuteNonQuery();
                         
                         _parentForm.AddNewBooking(
                           lblMovieName.Text, lblGenre.Text, lblPrice.Text, lblGenre.Text, lblCinema.Text);
 
-                        // Check if the insertion was successful
+                        
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Movie details have been successfully inserted into the database.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -243,7 +244,7 @@ namespace ETicketingSystem
 
         private void buyTicket_printrecieptBtn_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("The receipt was sent to your email account.", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void cbMovieName_SelectedIndexChanged(object sender, EventArgs e)
@@ -294,30 +295,19 @@ namespace ETicketingSystem
                         disclaimer = "Action-packed anime with fantasy violence.";
                         break;
                     default:
-                        // baseFare = 0; // Default value if no valid class is selected
                         disclaimer = "Please select a movie.";
                         break;
                 }
-
-                // Display the calculated base fare
-                lblMovieName.Text = movie; // Format as currency
+                lblMovieName.Text = movie; 
                 lblGenre.Text = genre;
-                lblPrice.Text = $"{price}";
+                lblPrice.Text = $"₱{price}";
                 lblCinema.Text = $"{cinema}";
-                lblDisclaimer.Text = disclaimer;  // Display the disclaimer for the selected movie
-
-                
+                lblDisclaimer.Text = disclaimer;  
             }
             else
             {
                 lblMovieName.Text = " Not movie Selected";
             }
-
-        }
-
-        private void lblPrice_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

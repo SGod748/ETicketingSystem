@@ -65,7 +65,7 @@
             // lblCinema
             // 
             lblCinema.AutoSize = true;
-            lblCinema.Location = new Point(111, 148);
+            lblCinema.Location = new Point(140, 158);
             lblCinema.Name = "lblCinema";
             lblCinema.Size = new Size(50, 20);
             lblCinema.TabIndex = 9;
@@ -74,16 +74,16 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(37, 148);
+            label5.Location = new Point(28, 158);
             label5.Name = "label5";
-            label5.Size = new Size(50, 20);
+            label5.Size = new Size(106, 20);
             label5.TabIndex = 8;
-            label5.Text = "label5";
+            label5.Text = "Cinema Room:";
             // 
             // lblQuantity
             // 
             lblQuantity.AutoSize = true;
-            lblQuantity.Location = new Point(111, 119);
+            lblQuantity.Location = new Point(140, 127);
             lblQuantity.Name = "lblQuantity";
             lblQuantity.Size = new Size(50, 20);
             lblQuantity.TabIndex = 7;
@@ -92,7 +92,7 @@
             // lblPrice
             // 
             lblPrice.AutoSize = true;
-            lblPrice.Location = new Point(111, 90);
+            lblPrice.Location = new Point(140, 96);
             lblPrice.Name = "lblPrice";
             lblPrice.Size = new Size(50, 20);
             lblPrice.TabIndex = 6;
@@ -101,7 +101,7 @@
             // lblGenre
             // 
             lblGenre.AutoSize = true;
-            lblGenre.Location = new Point(111, 69);
+            lblGenre.Location = new Point(140, 65);
             lblGenre.Name = "lblGenre";
             lblGenre.Size = new Size(50, 20);
             lblGenre.TabIndex = 5;
@@ -110,7 +110,7 @@
             // lblMovie
             // 
             lblMovie.AutoSize = true;
-            lblMovie.Location = new Point(111, 31);
+            lblMovie.Location = new Point(140, 31);
             lblMovie.Name = "lblMovie";
             lblMovie.Size = new Size(50, 20);
             lblMovie.TabIndex = 4;
@@ -119,38 +119,38 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(37, 119);
+            label4.Location = new Point(66, 127);
             label4.Name = "label4";
-            label4.Size = new Size(50, 20);
+            label4.Size = new Size(68, 20);
             label4.TabIndex = 3;
-            label4.Text = "label4";
+            label4.Text = "Quantity:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(37, 90);
+            label3.Location = new Point(90, 96);
             label3.Name = "label3";
-            label3.Size = new Size(50, 20);
+            label3.Size = new Size(44, 20);
             label3.TabIndex = 2;
-            label3.Text = "label3";
+            label3.Text = "Price:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(37, 69);
+            label2.Location = new Point(83, 65);
             label2.Name = "label2";
-            label2.Size = new Size(50, 20);
+            label2.Size = new Size(51, 20);
             label2.TabIndex = 1;
-            label2.Text = "label2";
+            label2.Text = "Genre:";
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Location = new Point(37, 31);
             label1.Name = "label1";
-            label1.Size = new Size(50, 20);
+            label1.Size = new Size(97, 20);
             label1.TabIndex = 0;
-            label1.Text = "label1";
+            label1.Text = "Movie Name:";
             // 
             // ticketListView
             // 

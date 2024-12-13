@@ -13,7 +13,7 @@ namespace ETicketingSystem
 {
     public partial class LoginFrm : Form
     {
-        string conn = @"Data Source=MSI\SQLEXPRESS;Initial Catalog=TicketDB;Integrated Security=True;Encrypt=False";
+        string conn = @"Data Source=JEYPI\SQLEXPRESS;Initial Catalog=movie;Integrated Security=True;Encrypt=False";
         public LoginFrm()
         {
             InitializeComponent();
@@ -49,7 +49,7 @@ namespace ETicketingSystem
                 {
                     connect.Open();
 
-                    string selectData = "SELECT * FROM Account WHERE usern = @usern AND pass = @pass";
+                    string selectData = "SELECT * FROM users WHERE username = @usern AND password = @pass";
 
                     using (SqlCommand cmd = new SqlCommand(selectData, connect))
                     {

@@ -19,15 +19,11 @@ namespace ETicketingSystem
 
         public void UpdateBookingInfo(string movie, string genre, string price, string quantity, string cinema)
         {
-
-
             lblMovie.Text = movie;
             lblGenre.Text = genre;
             lblPrice.Text = price;
             lblQuantity.Text = quantity;
-            lblCinema.Text = cinema;
-         
-            
+            lblCinema.Text = cinema;   
         }
 
     }

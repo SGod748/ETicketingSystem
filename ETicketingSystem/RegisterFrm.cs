@@ -10,7 +10,7 @@ namespace ETicketingSystem
 {
     public partial class RegisterFrm : Form
     {
-        string conn = @"Data Source=MSI\SQLEXPRESS;Initial Catalog=TicketDB;Integrated Security=True;Encrypt=False";
+        string conn = @"Data Source=JEYPI\SQLEXPRESS;Initial Catalog=movie;Integrated Security=True;Encrypt=False";
 
         public RegisterFrm()
         {
@@ -56,7 +56,6 @@ namespace ETicketingSystem
                 strengthMessage = "Strong password";
                 strengthColor = Color.Green;
             }
-
             passwordStrengthLabel.Text = strengthMessage;
             passwordStrengthLabel.ForeColor = strengthColor;
         }
@@ -65,7 +64,7 @@ namespace ETicketingSystem
         private bool HasLowerCase(string input) => input.Any(char.IsLower);
         private bool HasDigit(string input) => input.Any(char.IsDigit);
 
-        // Email validation event handler
+        
         private void signup_emailtxt_TextChanged(object sender, EventArgs e)
         {
             string email = signup_email.Text;
@@ -82,12 +81,11 @@ namespace ETicketingSystem
                 emailValidationMessage = "Invalid email format";
                 emailValidationColor = Color.Red;
             }
-
-            emailValidationLabel.Text = emailValidationMessage;  // You need to add emailValidationLabel to your form
+            emailValidationLabel.Text = emailValidationMessage;  
             emailValidationLabel.ForeColor = emailValidationColor;
         }
 
-        // Method to check if the email is valid using Regex
+      
         private bool IsValidEmail(string email)
         {
             try
@@ -121,12 +119,11 @@ namespace ETicketingSystem
             }
             else
             {
-                // Proceed to insert data into the database
                 using (SqlConnection connect = new SqlConnection(conn))
                 {
                     connect.Open();
 
-                    string checkUsername = "SELECT * FROM Account WHERE usern = @usern";
+                    string checkUsername = "SELECT * FROM users WHERE username = @usern";
 
                     using (SqlCommand checkUsern = new SqlCommand(checkUsername, connect))
                     {
@@ -144,7 +141,7 @@ namespace ETicketingSystem
                         }
                         else
                         {
-                            string insertData = "INSERT INTO Account (usern, pass, email, date)" +
+                            string insertData = "INSERT INTO users (username, password, email, date_reg)" +
                                 "VALUES(@usern, @pass, @email, @date)";
 
                             DateTime today = DateTime.Today;
